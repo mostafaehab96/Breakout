@@ -6,8 +6,6 @@ from breaks import Breaks
 from scoreboard import Scoreboard
 import time
 
-
-
 screen = Screen()
 screen.setup(width=800, height=600)
 screen.title("Breakout Game")
@@ -58,7 +56,8 @@ while game_is_on:
 
     for break_line in breaks.breaks:
         for brek in break_line:
-            if ball.distance(brek) <= 40:
+            distance = brek.shapesize()[1] * 11
+            if ball.distance(brek) < distance:
                 ball.bounce_y()
                 break_line.remove(brek)
                 brek.hideturtle()
@@ -66,13 +65,5 @@ while game_is_on:
                 scoreboard.update_score()
         if len(break_line) == 0:
             breaks.breaks.remove(break_line)
-
-
-
-
-
-
-
-
 
 turtle.mainloop()
