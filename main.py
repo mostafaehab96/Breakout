@@ -25,10 +25,10 @@ game_is_on = True
 while game_is_on:
     screen.update()
     ball.move()
-    time.sleep(0.03)
+    time.sleep(0.05)
 
     # hitting the paddle
-    if ball.distance(paddle) <= 40:
+    if ball.distance(paddle) <= 60 and ball.ycor() < -230:
         ball.bounce_y()
 
     # hitting the top wall
