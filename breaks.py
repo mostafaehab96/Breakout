@@ -2,9 +2,10 @@ from turtle import Turtle
 from random import randint, choice
 
 LINES = 5
-LENGTHS = [3, 4]
+LENGTHS = [3, 4, 5]
 WIDTH = 1.8
-
+START_Y = 220
+START_X = -350
 
 class Break(Turtle):
     def __init__(self):
@@ -13,7 +14,7 @@ class Break(Turtle):
         self.shape("square")
         self.penup()
         self.shapesize(stretch_wid=WIDTH, stretch_len=choice(LENGTHS))
-        self.goto(-350, 270)
+        self.goto(START_X, START_Y)
 
 
 class Breaks():
@@ -26,13 +27,14 @@ class Breaks():
         for line in range(LINES):
             break_line = []
             first_break = Break()
-            first_break.sety(270 - (line* 45))
+            first_break.sety(START_Y - (line* 45))
             break_line.append(first_break)
             break_count = 0
             while True:
                 new_break = Break()
                 previous_break = break_line[break_count]
-                new_break.goto(previous_break.xcor() + (previous_break.shapesize()[1] * 23), 270 - (line * 45))
+                width = max(previous_break.shapesize()[1], new_break.shapesize()[1])
+                new_break.goto(previous_break.xcor() + (width * 21), START_Y - (line * 45))
                 if new_break.xcor() >= 370:
                     new_break.hideturtle()
                     break
